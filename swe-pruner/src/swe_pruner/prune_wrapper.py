@@ -167,20 +167,13 @@ def build_input_for_llm(
         # Use original offsets
         code_offsets = code_enc["offset_mapping"]
 
-    # Build full sequence
+    # Build full sequence.
+    # Do not force-pad to max_length here: fixed 8k padding makes CPU inference
+    # extremely slow even for tiny requests.
     input_ids = prefix_tokens + query_ids + code_ids + suffix_tokens
-    real_len = len(input_ids)
-
-    # right padding for LLM
-    pad_len = max_length - real_len
-    # input_ids = [tokenizer.pad_token_id] * pad_len + input_ids
-    # attention_mask = [0] * pad_len + [1] * real_len
-    input_ids = input_ids + [tokenizer.pad_token_id] * pad_len
-    attention_mask = [1] * real_len + [0] * pad_len
+    attention_mask = [1] * len(input_ids)
 
     # Calculate code token positions
-    # doc_start = pad_len + len(prefix_tokens) + query_len
-    # doc_end = doc_start + code_len
     doc_start = len(prefix_tokens) + query_len
     doc_end = doc_start + code_len
 
@@ -441,6 +434,10 @@ class SwePrunerForCodePruning(SwePrunerForCodeCompression):
         if isinstance(target_dtype, str):
             target_dtype = getattr(torch, target_dtype, None)
 
+        # Keep CPU execution in float32 to avoid mixed dtype errors in custom heads.
+        if device.type == "cpu":
+            target_dtype = torch.float32
+
         # Move to device (and cast if dtype is specified)
         if target_dtype is not None:
             model = model.to(device=device, dtype=target_dtype)
@@ -487,10 +484,13 @@ class SwePrunerForCodePruning(SwePrunerForCodeCompression):
 
         # Run inference
         with torch.no_grad():
-            with torch.amp.autocast(
-                device_type="cuda" if torch.cuda.is_available() else "cpu",
-                dtype=torch.float16,
-            ):
+            if torch.cuda.is_available():
+                autocast_ctx = torch.amp.autocast(device_type="cuda", dtype=torch.float16)
+            else:
+                # CPU autocast can trigger mixed-dtype errors for this model stack.
+                autocast_ctx = torch.amp.autocast(device_type="cpu", enabled=False)
+
+            with autocast_ctx:
                 outputs: SwePrunerOutput = self(
                     input_ids=input_ids, attention_mask=attention_mask
                 )

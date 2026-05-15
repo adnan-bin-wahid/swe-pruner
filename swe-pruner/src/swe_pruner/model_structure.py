@@ -230,7 +230,12 @@ class TokenScorer(nn.Module):
                 backbone_kwargs["torch_dtype"] = torch_dtype
             if attn_implementation is not None:
                 backbone_kwargs["attn_implementation"] = attn_implementation
-            self.backbone = AutoModel.from_pretrained(model_name, **backbone_kwargs)
+            try:
+                self.backbone = AutoModel.from_pretrained(model_name, **backbone_kwargs)
+            except Exception:
+                # Fallback for environments without flash-attn (e.g. Windows CPU setups).
+                backbone_kwargs.pop("attn_implementation", None)
+                self.backbone = AutoModel.from_pretrained(model_name, **backbone_kwargs)
         else:
             if backbone_config is None:
                 backbone_config = AutoConfig.from_pretrained(

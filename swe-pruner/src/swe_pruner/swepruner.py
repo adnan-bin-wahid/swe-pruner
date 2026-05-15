@@ -33,6 +33,12 @@ class SwePrunerPreTrainedModel(PreTrainedModel):
     base_model_prefix = ""
     supports_gradient_checkpointing = False
 
+    def __init__(self, config):
+        super().__init__(config)
+        # transformers>=5 expects this mapping during model finalization.
+        if not hasattr(self, "all_tied_weights_keys"):
+            self.all_tied_weights_keys = {}
+
     def _init_weights(self, module):
         """Initialize the weights - DISABLED for debugging"""
         pass

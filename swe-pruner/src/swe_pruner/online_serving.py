@@ -6,6 +6,11 @@ import logging
 import uvicorn
 import typer
 from .prune_wrapper import SwePrunerForCodePruning, PruneRequest, PruneResponse
+from .carbon_estimator import (
+    CarbonEstimateRequest,
+    CarbonEstimateResponse,
+    CarbonEstimator,
+)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -14,6 +19,7 @@ app = FastAPI(title="Code Pruning Service")
 
 # Global model and tokenizer
 model: Optional[SwePrunerForCodePruning] = None
+carbon_estimator = CarbonEstimator()
 
 # Create Typer app
 cli = typer.Typer(help="SwePruner code pruning service")
@@ -70,6 +76,11 @@ async def prune_code(request: PruneRequest) -> PruneResponse | None:
         raise HTTPException(status_code=500, detail="Model not loaded")
     response = model.prune(request)
     return response
+
+
+@app.post("/estimate-carbon", response_model=CarbonEstimateResponse)
+async def estimate_carbon(request: CarbonEstimateRequest) -> CarbonEstimateResponse:
+    return carbon_estimator.estimate(request)
 
 
 @cli.command()

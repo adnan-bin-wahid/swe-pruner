@@ -118,13 +118,16 @@ class DualModeRegressorEngine:
         features = self._as_frame(request)
         route = self._route(request.model_size_b)
 
+        prefill_route: RouteType
+        decode_route: RouteType
+
         if route == "xgboost_interpolation":
             if self.xgb_prefill is None or self.xgb_decode is None:
                 raise RuntimeError("XGBoost interpolation models are missing")
             prefill = float(self.xgb_prefill.predict(features)[0])
             decode = float(self.xgb_decode.predict(features)[0])
-            prefill_route: RouteType = "xgboost_interpolation"
-            decode_route: RouteType = "xgboost_interpolation"
+            prefill_route = "xgboost_interpolation"
+            decode_route = "xgboost_interpolation"
         else:
             if self.ridge_prefill is None or self.ridge_decode is None:
                 raise RuntimeError("Ridge extrapolation models are missing")

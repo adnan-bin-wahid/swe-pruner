@@ -1,0 +1,9 @@
+{
+  "gpu_encoder": {
+    "nvidia-a100-80gb": 0,
+    "nvidia-a10g": 1,
+    "nvidia-t4": 2
+  },
+  "interpolation_min_model_size_b": 7.0,
+  "interpolation_max_model_size_b": 111.0
+}

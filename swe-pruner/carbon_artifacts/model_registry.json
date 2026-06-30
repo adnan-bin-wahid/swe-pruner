@@ -1,0 +1,346 @@
+{
+  "decilm-7b": {
+    "model_size_b": 7.0,
+    "mmlu_pro_score": 0.27,
+    "bbh_score": 0.44,
+    "latency_per_input_token_ms": 0.3167606830596922,
+    "latency_per_output_token_ms": 17.747921562194826,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "distilgpt2": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.3,
+    "latency_per_input_token_ms": 0.04149945507093301,
+    "latency_per_output_token_ms": 2.5538941149716914,
+    "gpu_type": "nvidia-a10g"
+  },
+  "falcon-7b": {
+    "model_size_b": 7.0,
+    "mmlu_pro_score": 0.11,
+    "bbh_score": 0.33,
+    "latency_per_input_token_ms": 2.683784690499306,
+    "latency_per_output_token_ms": 28.907734584808345,
+    "gpu_type": "nvidia-a10g"
+  },
+  "gemma-2-2b": {
+    "model_size_b": 2.0,
+    "mmlu_pro_score": 0.22,
+    "bbh_score": 0.37,
+    "latency_per_input_token_ms": 0.39279542714357363,
+    "latency_per_output_token_ms": 24.506215763092044,
+    "gpu_type": "nvidia-a10g"
+  },
+  "gemma-2b": {
+    "model_size_b": 2.0,
+    "mmlu_pro_score": 0.14,
+    "bbh_score": 0.34,
+    "latency_per_input_token_ms": 0.9855494912713764,
+    "latency_per_output_token_ms": 11.17384467124939,
+    "gpu_type": "nvidia-a10g"
+  },
+  "gemma-7b": {
+    "model_size_b": 8.0,
+    "mmlu_pro_score": 0.29,
+    "bbh_score": 0.44,
+    "latency_per_input_token_ms": 0.3660709381103516,
+    "latency_per_output_token_ms": 21.470923423767093,
+    "gpu_type": "nvidia-a10g"
+  },
+  "gpt-j-6b": {
+    "model_size_b": 6.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.32,
+    "latency_per_input_token_ms": 0.3289603620767594,
+    "latency_per_output_token_ms": 22.00034828186035,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "gpt-neo-1.3b": {
+    "model_size_b": 1.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.3,
+    "latency_per_input_token_ms": 0.07530883202950156,
+    "latency_per_output_token_ms": 6.790076692899068,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "gpt-neo-125m": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.1,
+    "bbh_score": 0.31,
+    "latency_per_input_token_ms": 0.03088618451285899,
+    "latency_per_output_token_ms": 3.777974912098476,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "gpt-neo-2.7b": {
+    "model_size_b": 2.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.31,
+    "latency_per_input_token_ms": 0.12516121193766563,
+    "latency_per_output_token_ms": 9.343385124206543,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "gpt-neox-20b": {
+    "model_size_b": 20.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.32,
+    "latency_per_input_token_ms": 1.3164032220840451,
+    "latency_per_output_token_ms": 28.3177059173584,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "gpt2": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.3,
+    "latency_per_input_token_ms": 0.03537990356033476,
+    "latency_per_output_token_ms": 3.622318983078003,
+    "gpu_type": "nvidia-a10g"
+  },
+  "gpt2-large": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.11,
+    "bbh_score": 0.31,
+    "latency_per_input_token_ms": 0.33712865486741034,
+    "latency_per_output_token_ms": 9.590622663497925,
+    "gpu_type": "nvidia-a10g"
+  },
+  "llama-13b": {
+    "model_size_b": 13.0,
+    "mmlu_pro_score": 0.2,
+    "bbh_score": 0.4,
+    "latency_per_input_token_ms": 3.832143467664719,
+    "latency_per_output_token_ms": 39.82680025100708,
+    "gpu_type": "nvidia-a10g"
+  },
+  "llama-2-13b-hf": {
+    "model_size_b": 13.0,
+    "mmlu_pro_score": 0.24,
+    "bbh_score": 0.41,
+    "latency_per_input_token_ms": 3.831531977653503,
+    "latency_per_output_token_ms": 39.85620379447938,
+    "gpu_type": "nvidia-a10g"
+  },
+  "llama-2-7b-hf": {
+    "model_size_b": 6.0,
+    "mmlu_pro_score": 0.19,
+    "bbh_score": 0.35,
+    "latency_per_input_token_ms": 2.076285044848919,
+    "latency_per_output_token_ms": 23.261534976959226,
+    "gpu_type": "nvidia-a10g"
+  },
+  "llama-7b": {
+    "model_size_b": 6.0,
+    "mmlu_pro_score": 0.13,
+    "bbh_score": 0.33,
+    "latency_per_input_token_ms": 2.0786483347415925,
+    "latency_per_output_token_ms": 23.232890605926514,
+    "gpu_type": "nvidia-a10g"
+  },
+  "meta-llama-3-8b": {
+    "model_size_b": 8.0,
+    "mmlu_pro_score": 0.32,
+    "bbh_score": 0.46,
+    "latency_per_input_token_ms": 0.3285545378923414,
+    "latency_per_output_token_ms": 19.291618156433106,
+    "gpu_type": "nvidia-a10g"
+  },
+  "meta-llama-3-8b-instruct": {
+    "model_size_b": 8.0,
+    "mmlu_pro_score": 0.36,
+    "bbh_score": 0.49,
+    "latency_per_input_token_ms": 0.4221645474433898,
+    "latency_per_output_token_ms": 19.79143581390381,
+    "gpu_type": "nvidia-a10g"
+  },
+  "mistral-7b-instruct-v0.2": {
+    "model_size_b": 7.0,
+    "mmlu_pro_score": 0.27,
+    "bbh_score": 0.45,
+    "latency_per_input_token_ms": 0.3145528107881543,
+    "latency_per_output_token_ms": 18.344821166992187,
+    "gpu_type": "nvidia-a10g"
+  },
+  "mistral-7b-v0.1": {
+    "model_size_b": 7.0,
+    "mmlu_pro_score": 0.3,
+    "bbh_score": 0.44,
+    "latency_per_input_token_ms": 2.7305346906185144,
+    "latency_per_output_token_ms": 25.078861999511716,
+    "gpu_type": "nvidia-a10g"
+  },
+  "mistral_pro_8b_v0.1": {
+    "model_size_b": 8.0,
+    "mmlu_pro_score": 0.28,
+    "bbh_score": 0.45,
+    "latency_per_input_token_ms": 0.2835030786693094,
+    "latency_per_output_token_ms": 19.916635513305664,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "opt-30b": {
+    "model_size_b": 30.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.31,
+    "latency_per_input_token_ms": 1.1404807075858114,
+    "latency_per_output_token_ms": 40.8776174545288,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "phi-1_5": {
+    "model_size_b": 1.0,
+    "mmlu_pro_score": 0.17,
+    "bbh_score": 0.34,
+    "latency_per_input_token_ms": 0.10904002636671055,
+    "latency_per_output_token_ms": 9.28374900817871,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "phi-3-mini-4k-instruct": {
+    "model_size_b": 3.0,
+    "mmlu_pro_score": 0.395,
+    "bbh_score": 0.56,
+    "latency_per_input_token_ms": 0.5629786983132361,
+    "latency_per_output_token_ms": 16.886819458007814,
+    "gpu_type": "nvidia-a10g"
+  },
+  "pythia-12b": {
+    "model_size_b": 12.0,
+    "mmlu_pro_score": 0.11,
+    "bbh_score": 0.32,
+    "latency_per_input_token_ms": 0.6687337756156921,
+    "latency_per_output_token_ms": 17.51340961456299,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "pythia-160m": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.11,
+    "bbh_score": 0.3,
+    "latency_per_input_token_ms": 0.04344752167954141,
+    "latency_per_output_token_ms": 4.625372297623579,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "pythia-410m": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.11,
+    "bbh_score": 0.3,
+    "latency_per_input_token_ms": 0.08121033757925,
+    "latency_per_output_token_ms": 9.079733562469483,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "qwen1.5-0.5b": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.13,
+    "bbh_score": 0.32,
+    "latency_per_input_token_ms": 0.07873622551560391,
+    "latency_per_output_token_ms": 9.370179557800292,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "qwen1.5-1.8b": {
+    "model_size_b": 1.0,
+    "mmlu_pro_score": 0.19,
+    "bbh_score": 0.35,
+    "latency_per_input_token_ms": 0.19931429401040038,
+    "latency_per_output_token_ms": 9.808950233459473,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "qwen1.5-32b": {
+    "model_size_b": 32.0,
+    "mmlu_pro_score": 0.45,
+    "bbh_score": 0.57,
+    "latency_per_input_token_ms": 0.44271372556686406,
+    "latency_per_output_token_ms": 26.71749286651611,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "qwen1.5-4b": {
+    "model_size_b": 3.0,
+    "mmlu_pro_score": 0.25,
+    "bbh_score": 0.41,
+    "latency_per_input_token_ms": 1.4455128006637095,
+    "latency_per_output_token_ms": 17.646876382827763,
+    "gpu_type": "nvidia-a10g"
+  },
+  "qwen1.5-7b": {
+    "model_size_b": 7.0,
+    "mmlu_pro_score": 0.29,
+    "bbh_score": 0.46,
+    "latency_per_input_token_ms": 0.37900487482547734,
+    "latency_per_output_token_ms": 18.269841384887695,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "qwen1.5-moe-a2.7b": {
+    "model_size_b": 14.0,
+    "mmlu_pro_score": 0.28,
+    "bbh_score": 0.41,
+    "latency_per_input_token_ms": 1.2592358589172363,
+    "latency_per_output_token_ms": 123.4480712890625,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "qwen2-0.5b": {
+    "model_size_b": 0.0,
+    "mmlu_pro_score": 0.17,
+    "bbh_score": 0.33,
+    "latency_per_input_token_ms": 0.19565472416579688,
+    "latency_per_output_token_ms": 11.86984829902649,
+    "gpu_type": "nvidia-a10g"
+  },
+  "recurrentgemma-2b": {
+    "model_size_b": 2.0,
+    "mmlu_pro_score": 0.12,
+    "bbh_score": 0.32,
+    "latency_per_input_token_ms": 1.9004217267036438,
+    "latency_per_output_token_ms": 16.92224669456482,
+    "gpu_type": "nvidia-a10g"
+  },
+  "recurrentgemma-9b": {
+    "model_size_b": 9.0,
+    "mmlu_pro_score": 0.26,
+    "bbh_score": 0.4,
+    "latency_per_input_token_ms": 2.0673264384269716,
+    "latency_per_output_token_ms": 23.408306312561038,
+    "gpu_type": "nvidia-a10g"
+  },
+  "redpajama-incite-base-3b-v1": {
+    "model_size_b": 3.0,
+    "mmlu_pro_score": 0.11,
+    "bbh_score": 0.31,
+    "latency_per_input_token_ms": 1.1528451710939405,
+    "latency_per_output_token_ms": 63.189740943908696,
+    "gpu_type": "nvidia-a10g"
+  },
+  "stablelm-2-1_6b": {
+    "model_size_b": 1.0,
+    "mmlu_pro_score": 0.15,
+    "bbh_score": 0.34,
+    "latency_per_input_token_ms": 0.411110720410943,
+    "latency_per_output_token_ms": 14.096879625320437,
+    "gpu_type": "nvidia-a10g"
+  },
+  "stablelm-3b-4e1t": {
+    "model_size_b": 2.0,
+    "mmlu_pro_score": 0.17,
+    "bbh_score": 0.35,
+    "latency_per_input_token_ms": 0.9915225807577371,
+    "latency_per_output_token_ms": 12.761233615875245,
+    "gpu_type": "nvidia-a10g"
+  },
+  "yi-34b": {
+    "model_size_b": 34.0,
+    "mmlu_pro_score": 0.44,
+    "bbh_score": 0.55,
+    "latency_per_input_token_ms": 0.5106710135936735,
+    "latency_per_output_token_ms": 28.270356941223145,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "yi-6b": {
+    "model_size_b": 6.0,
+    "mmlu_pro_score": 0.3,
+    "bbh_score": 0.43,
+    "latency_per_input_token_ms": 0.3328679651021957,
+    "latency_per_output_token_ms": 16.374259376525877,
+    "gpu_type": "nvidia-a100-80gb"
+  },
+  "zephyr-7b-beta": {
+    "model_size_b": 7.0,
+    "mmlu_pro_score": 0.28,
+    "bbh_score": 0.43,
+    "latency_per_input_token_ms": 2.8592711061239235,
+    "latency_per_output_token_ms": 27.538267803192138,
+    "gpu_type": "nvidia-a10g"
+  }
+}

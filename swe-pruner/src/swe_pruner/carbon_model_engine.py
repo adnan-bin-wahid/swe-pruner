@@ -132,6 +132,10 @@ class DualModeRegressorEngine:
             prefill_route = "ridge_extrapolation"
             decode_route = "ridge_extrapolation"
 
+        # Scale by requested token counts since training benchmark had fixed token lengths (256/128)
+        prefill = prefill * (request.n_input_tokens / 256.0)
+        decode = decode * (request.n_output_tokens / 128.0)
+
         return EstimationResponse(
             prefill_joules=max(0.0, prefill),
             decode_joules=max(0.0, decode),

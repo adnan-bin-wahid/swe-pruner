@@ -48,17 +48,16 @@ async def startup_event():
         if not check_model_path(model_name_or_path):
             error_msg = (
                 f"Model not found at {model_name_or_path}. "
-                "Please download the model or set SWEPRUNER_MODEL_PATH environment variable. "
-                "See README.md for instructions."
+                "The /prune endpoint will be disabled. /estimate-carbon is still available."
             )
-            logger.error(error_msg)
-            raise FileNotFoundError(error_msg)
-
-        model = SwePrunerForCodePruning.from_pretrained(model_name_or_path)
-        logger.info(f"Model loaded successfully from {model_name_or_path}")
+            logger.warning(error_msg)
+            model = None
+        else:
+            model = SwePrunerForCodePruning.from_pretrained(model_name_or_path)
+            logger.info(f"Model loaded successfully from {model_name_or_path}")
     except Exception as e:
-        logger.error(f"Failed to load model: {e}")
-        raise
+        logger.warning(f"Failed to load LLM model: {e}. The /prune endpoint will be disabled.")
+        model = None
 
 
 @app.get("/health")

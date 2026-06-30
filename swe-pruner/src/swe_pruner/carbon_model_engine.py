@@ -70,7 +70,8 @@ class DualModeRegressorEngine:
         if not path.exists():
             return None
 
-        model = XGBRegressor()
+        from xgboost import XGBRegressor as _XGBRegressor
+        model = _XGBRegressor()
         model.load_model(path)
         return model
 

@@ -60,6 +60,8 @@ class WorkspacePruneRequest(BaseModel):
     selected_code: Optional[str] = None
     diagnostics: List[str] = []
     threshold: float = 0.45
+    local_llm_url: Optional[str] = None
+    local_llm_model: Optional[str] = None
 
 class WorkspacePruneResponse(BaseModel):
     structured_goal: dict
@@ -138,7 +140,9 @@ async def prune_workspace(request: WorkspacePruneRequest) -> WorkspacePruneRespo
         active_file=active_rel_path,
         current_symbol=request.current_symbol,
         selected_code=request.selected_code,
-        diagnostics=request.diagnostics
+        diagnostics=request.diagnostics,
+        local_llm_url=request.local_llm_url,
+        local_llm_model=request.local_llm_model
     )
 
     # 2. Build index and dependency graph

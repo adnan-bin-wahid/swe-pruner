@@ -78,7 +78,9 @@ CRITICAL SAFEGUARDS:
         active_file: str, 
         current_symbol: Optional[str], 
         selected_code: Optional[str], 
-        diagnostics: List[str]
+        diagnostics: List[str],
+        local_llm_url: Optional[str] = None,
+        local_llm_model: Optional[str] = None
     ) -> StructuredGoal:
         # Check if query is extremely vague and no context evidence is present
         is_vague = not query or query.lower().strip() in {"fix bug", "fix", "bug", "help", "debug", "test", "run"}
@@ -99,7 +101,9 @@ CRITICAL SAFEGUARDS:
         # Call Qwen2.5-Coder if client can connect
         if self.generator:
             goal = await self.generator.generate_goal(
-                self.build_prompt(query, active_file, current_symbol, selected_code, diagnostics)
+                prompt=self.build_prompt(query, active_file, current_symbol, selected_code, diagnostics),
+                endpoint_url=local_llm_url,
+                model=local_llm_model
             )
 
         # Fallback if generation failed

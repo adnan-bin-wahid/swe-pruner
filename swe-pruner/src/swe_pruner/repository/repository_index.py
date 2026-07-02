@@ -32,6 +32,7 @@ class RepositoryIndex:
                     try:
                         rel_path = str(full_path.relative_to(self.workspace_root)).replace('\\', '/')
                         file_meta = self.indexer.index_file(full_path)
+                        file_meta["content"] = full_path.read_text(encoding='utf-8')
                         self.index[rel_path] = file_meta
                     except Exception as e:
                         logger.error(f"Error indexing {full_path}: {e}")

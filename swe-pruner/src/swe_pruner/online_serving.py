@@ -160,18 +160,18 @@ async def prune_workspace(request: WorkspacePruneRequest) -> WorkspacePruneRespo
     graph_retriever = GraphRetriever(dep_graph)
     distances = graph_retriever.get_neighbors(seed_files, max_hops=1)
 
-    # Load file contents for ranking
+    # Load file contents for candidate ranking and context packing
     candidates = []
-    for path in distances:
-        if path in repo_index.index:
-            file_path_abs = workspace_root_path / path
-            if file_path_abs.exists():
-                try:
-                    content = file_path_abs.read_text(encoding='utf-8')
+    for path, meta in repo_index.index.items():
+        file_path_abs = workspace_root_path / path
+        if file_path_abs.exists():
+            try:
+                content = file_path_abs.read_text(encoding='utf-8')
+                meta["content"] = content
+                if path in distances:
                     candidates.append((path, content))
-                    repo_index.index[path]["content"] = content
-                except Exception as e:
-                    logger.error(f"Error reading file {file_path_abs}: {e}")
+            except Exception as e:
+                logger.error(f"Error reading file {file_path_abs}: {e}")
 
     # 4. Neural Reranking: Only rerank files that are active or match goal identifiers precisely
     rank_candidates = []

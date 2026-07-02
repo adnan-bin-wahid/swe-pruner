@@ -1,6 +1,6 @@
 import logging
 from typing import List, Dict, Any, Tuple
-from ..prune_wrapper import prune_code_lines, aggregate_token_scores_to_lines, PruneRequest
+from ..prune_wrapper import prune_code_lines, aggregate_token_scores_to_lines, PruneRequest, estimate_token_count
 
 logger = logging.getLogger(__name__)
 
@@ -27,8 +27,7 @@ class ContextBuilder:
         output_blocks = []
         file_summary_results = []
         
-        # Determine tiers
-        # Create map of scores for easier lookup
+        tokenizer = getattr(pruner_model, "tokenizer", None)
         score_map = {path: score for path, score in ranked_scores}
         
         for rel_path, file_meta in files_metadata.items():
@@ -53,19 +52,22 @@ class ContextBuilder:
                 rel_label = "related test"
 
             original_lines = content.splitlines()
-            original_token_count = len(content.split()) # estimate
+            if tokenizer:
+                original_token_count = estimate_token_count(content, tokenizer)
+            else:
+                original_token_count = len(content.split())
             
             print(f"ContextBuilder: processing {rel_path} (tier: {tier}, lines: {len(original_lines)})...", flush=True)
             pruned_content = ""
             
             if tier == 1:
                 # Tier 1: Full/lightly pruned body
-                # Use standard pruner with lenient threshold
                 try:
                     req = PruneRequest(query=query, code=content, threshold=max(0.1, threshold - 0.15))
                     prune_res = pruner_model.prune(req)
                     pruned_content = prune_res.pruned_code
                     final_token_count = prune_res.left_token_cnt
+                    original_token_count = prune_res.origin_token_cnt
                 except Exception as e:
                     logger.error(f"Failed to prune Tier 1 file {rel_path}: {e}")
                     pruned_content = content
@@ -73,21 +75,22 @@ class ContextBuilder:
                     
             elif tier == 2:
                 # Tier 2: Signature + aggressively pruned body
-                # We'll extract class / function signatures, keep them, and heavily prune methods
                 try:
                     req = PruneRequest(query=query, code=content, threshold=min(0.85, threshold + 0.15))
                     prune_res = pruner_model.prune(req)
                     pruned_content = prune_res.pruned_code
                     final_token_count = prune_res.left_token_cnt
+                    original_token_count = prune_res.origin_token_cnt
                 except Exception as e:
-                    # Fallback to simple first-10-lines signature + body
                     logger.error(f"Failed to prune Tier 2 file {rel_path}: {e}")
                     pruned_content = "\n".join(original_lines[:10]) + "\n... (body truncated)"
-                    final_token_count = len(pruned_content.split())
+                    if tokenizer:
+                        final_token_count = estimate_token_count(pruned_content, tokenizer)
+                    else:
+                        final_token_count = len(pruned_content.split())
 
             else:
                 # Tier 3: Signatures only (Classes and function declarations only)
-                # Walk the index classes and methods
                 signatures = []
                 for class_name, cls_info in file_meta.get("classes", {}).items():
                     signatures.append(f"class {class_name}:")
@@ -97,11 +100,14 @@ class ContextBuilder:
                     signatures.append(f"def {func_name}(...): ...")
                 
                 if not signatures:
-                    # Simple fallback
                     pruned_content = f"# Module {rel_path} interface reference"
                 else:
                     pruned_content = "\n".join(signatures)
-                final_token_count = len(pruned_content.split())
+                
+                if tokenizer:
+                    final_token_count = estimate_token_count(pruned_content, tokenizer)
+                else:
+                    final_token_count = len(pruned_content.split())
 
             print(f"ContextBuilder: completed {rel_path}. Pruned tokens: {final_token_count}", flush=True)
             # Format block with headers and metadata

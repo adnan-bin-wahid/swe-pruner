@@ -140,9 +140,13 @@ CRITICAL SAFEGUARDS:
                 break
 
         # Extract potential identifiers using regex from query/diagnostics
-        potential_idents = []
+        stop_words = {
+            "fix", "bug", "optimize", "add", "remove", "refactor", "test", "debug", 
+            "understand", "the", "to", "in", "on", "for", "code", "and", "or", "with", 
+            "a", "an", "is", "are", "issue", "validate", "creadentails", "credentials"
+        }
         for word in re.findall(r'[a-zA-Z_][a-zA-Z0-9_]*', query):
-            if word not in {"fix", "bug", "optimize", "add", "remove", "refactor", "test", "debug", "understand", "the", "to", "in", "on", "for", "code"}:
+            if word.lower() not in stop_words and len(word) > 2:
                 potential_idents.append(word)
         if current_symbol:
             potential_idents.append(current_symbol)
